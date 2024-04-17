@@ -30,5 +30,7 @@ public struct ParseOptions: OptionSet {
 
     /// Disable including a `data-sourcepos` attribute on all block elements during parsing.
     public static let disableSourcePosOpts = ParseOptions(rawValue: 1 << 4)
+
+    public static let disableBlockParsing = ParseOptions(rawValue: 1 << 5)
 }
 

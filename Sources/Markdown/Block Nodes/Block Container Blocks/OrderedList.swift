@@ -21,6 +21,10 @@ public struct OrderedList: ListItemContainer, BlockMarkup {
     init(_ data: _MarkupData) {
         self._data = data
     }
+
+    public var range: Range<SourceLocation>? {
+      return self._data.range
+    }
 }
 
 // MARK: - Public API
