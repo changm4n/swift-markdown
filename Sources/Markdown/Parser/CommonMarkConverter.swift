@@ -297,16 +297,8 @@ struct MarkupParser {
                 fatalError("Converted cmark list had a node other than RawMarkup.listItem")
             }
         }
-
-        switch cmark_node_get_list_type(state.node) {
-        case CMARK_BULLET_LIST:
-            return MarkupConversion(state: childConversion.state.next(), result: .unorderedList(parsedRange: parsedRange, childConversion.result))
-        case CMARK_ORDERED_LIST:
-            let cmarkStart = UInt(cmark_node_get_list_start(state.node))
-            return MarkupConversion(state: childConversion.state.next(), result: .orderedList(parsedRange: parsedRange, childConversion.result, startIndex: cmarkStart))
-        default:
-            fatalError("cmark reported a list node but said its list type is CMARK_NO_LIST?")
-        }
+//        state.node?.pointee.type = 0x0008
+        return MarkupConversion(state: childConversion.state.next(), result: .paragraph(parsedRange: parsedRange, childConversion.result))
     }
 
     private static func convertListItem(_ state: MarkupConverterState) -> MarkupConversion<RawMarkup> {
